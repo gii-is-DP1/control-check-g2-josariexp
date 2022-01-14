@@ -49,11 +49,8 @@ public class FeedingController {
 				feedingService.save(feeding);
 			} catch (UnfeasibleFeedingException e) {
 				// TODO Auto-generated catch block
-				modelMap.addAttribute("message", "La mascota seleccionada no se le puede asignar el plan de alimentación especificado.");
-				modelMap.addAttribute("feeding", feeding);
-				modelMap.addAttribute("feedingTypes", feedingService.getAllFeedingTypes());
-				modelMap.addAttribute("pets", petService.getAllPets());
-				return VIEWS_FEEDING_CREATE_OR_UPDATE_FORM;
+				result.rejectValue("pet", "not match", "La mascota seleccionada no se le puede asignar el plan de alimentación especificado.");
+                return VIEWS_FEEDING_CREATE_OR_UPDATE_FORM;
 			}
 			modelMap.addAttribute("message", "Feeding successfully saves!");
 		}
